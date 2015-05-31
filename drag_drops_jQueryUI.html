@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Learning jQuery</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+	<script type="text/javascript" src="jquery.min.js"></script>
+	
+	<!-- Load the jQueryUI stuff in from the google API CDN -->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	
+   
+	<style>
+		#square {
+			width:200px;
+			height:200px;
+			background-color:grey;
+			font-family: Helvetica;
+			font-color: white;
+		}
+		
+	
+		#target {
+			width:300px;
+			height:300px;
+			background-color:yellow;
+			font-family: Helvetica;
+			font-color: white;
+		}
+		
+	</style>
+
+</head>	
+
+<body>
+	 
+
+	<div id="square">Drag and Drop Me!</div>
+	
+	<div id="target"></div>
+
+	<script>
+		$("#square").draggable();
+
+		$("#target").droppable({
+			drop: function(ui, event) {
+			
+				$(this).css("background-color","red");
+			}
+		});
+		
+	</script>
+	
+
+</body>
+</html>

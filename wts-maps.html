@@ -1,0 +1,257 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Simple Leaflet Map</title>
+    <meta charset="utf-8" />
+	<link 
+		rel="stylesheet" 
+		href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" 
+	/>
+	
+	<style>
+		
+		body {
+			font-family: Arial, Helmet, Freesans, sans-serif;
+			margin:0;
+			line-height:16px;
+		}
+		
+
+		
+		.fixed-width {
+		
+			width:1150px;
+			margin: 0 auto;
+		}
+		
+		#wts-logo {
+			padding-left:10px;
+			float: left;
+			border-right: 1px solid ##3A671E;
+			height:46px;
+			z-index: 3;
+		
+		}
+	
+		#wts-logo img {
+			float: left;
+			margin:0px 10px 0 10px;
+			height: 50px:
+			width: 80px;
+			z-index: 1;
+		}
+		
+<!--		#sign-in {
+	 	 float:left;
+	 	 color:#FFF;
+	 	 height:41px;
+	 	 width:200px;
+		}
+-->	 	
+		#login: hover {
+			border-bottom:5px solid white;
+		}
+		
+		#top-bar {
+			background-color: #53932B;
+			width:100%;
+			height:52px;
+			margin:0;
+		
+		}
+		
+		#top-bar ul {
+			float:left;
+			padding: 0;
+			margin: 0;
+			height:46px;
+			z-index: 0;
+			
+		}
+		
+		#top-bar li {
+			float: left;
+			color:white;
+			border-left: 1px solid #3A671E;
+			height: 33px;
+			list-style: none;
+			padding: 15px 20px 0 20px;
+			z-index: -1;
+		
+		}
+		
+		#top-bar li:hover {
+			height: 28px;
+		
+		}
+		
+		
+		#top-bar input {
+			height:25px;
+			border:none;
+			width:180px;
+			font-weight:bold;
+			color:black;
+			font-size:100%;
+			padding-left:10px;
+			position:relative;
+			top:-4px;
+	
+		}
+		
+		.clear {
+			clear: both;
+		}
+		
+		#title-bar {
+			background-color:#53932B;
+			width:100%;
+			height:80px;
+		}
+		
+		#map {
+			width: 1100px;
+			height: 700px;
+			margin: 0 auto;
+			margin-top: 6px;
+		}
+	</style>
+	
+</head>	
+
+<body>
+	
+	<div id="container">
+
+		 <div id="top-bar">
+			
+			<div class="fixed-width">
+				
+			<div id="wts-logo">
+				<img src="images/wts_small.png"
+			</div>
+				
+				<ul>
+					<li id="wts-dealers">
+						WTS Signed Dealer
+					</li>
+					
+					<li id="territory-map">
+						Dealers by Territory
+					</li>
+					
+					<li id="oem-map">
+						Dealers by OEM
+					</li>
+					
+					<li id="other-map">
+						Other Maps
+					</li>
+					
+					<li>
+						<input type="text" placeholder="Search" />
+					</li>
+					
+					<li id="login">
+						Login
+					</li>
+				
+				</ul>
+
+			</div>
+		</div>
+		<div class="clear"></div>
+		
+
+		<div id="map"></div>
+	
+		<script 
+		src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js">
+		</script>
+	
+
+		<script>  
+	
+			var fordDealers = [
+				["Cavalier Ford Chesapeake Square",[36.823550,-76.407040],"Ford"],
+				["Bergey's Dealer Group",[40.310250,-75.354310],"Ford"],
+				["Bangor Ford",[44.828015,-68.739418],"Ford"],
+				["Tom Masano Ford Lincoln",[40.309525,-75.952350],"Ford"],
+				["Adamson Ford, L.L.C.",[33.510998,-86.803982],"Ford"]
+			];
+
+			var chevyDealers = [
+				["Greg Weeks West Frankfort, Inc.",[37.896759,-88.954863],"Chevrolet"],
+				["Jeff Gordon Chevrolet",[34.238967,-77.872343],"Chevrolet"],
+				["Gilchrist Chevrolet",[47.201778,-122.484161],"Chevrolet"],
+				["Rosedale Chevrolet",[45.026980,-93.193842],"Chevrolet"],
+				["Stillwater Motors",[45.034709,-92.849236],"Chevrolet"]
+			];
+
+			var gmcDealers = [
+				["Rick Hendrick GMC",[33.966395,-84.143648],"GMC"],
+				["Bergey Buick GMC",[40.309326,-75.356045],"GMC"],
+				["James Wood GMC Denton",[33.169597,-97.086992],"GMC"],
+				["James Wood GMC Decatur",[33.217279,-97.584642],"GMC"],
+				["Rydell GMC",[47.895012,-97.046834],"GMC"]
+			];
+		
+			var ford = new L.LayerGroup();
+			
+				for (var i = 0; i < fordDealers.length; i++) {
+					L.marker(fordDealers[i][1]).bindPopup(fordDealers[i][0]).addTo(ford);
+				};
+
+			var chevy = new L.LayerGroup();
+			
+				for (var i = 0; i < chevyDealers.length; i++) {
+					L.marker(chevyDealers[i][1]).bindPopup(chevyDealers[i][0]).addTo(chevy);
+				};			
+
+			var gmc = new L.LayerGroup();
+			
+				for (var i = 0; i < gmcDealers.length; i++) {
+					L.marker(gmcDealers[i][1]).bindPopup(gmcDealers[i][0]).addTo(gmc);
+				};	
+			
+
+			// set the source for attribution information
+			var osmLink = '<a href="http://maps.stamen.com">Stamen</a>',
+				opnLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+
+			
+			var osmUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', 
+				osmAttrib = '&copy; ' + osmLink + ' Contributors',
+				opnUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+				opnAttrib = '&copy; ' + osmLink + ' Contributors & ' + opnLink;
+
+
+			var osmMap = L.tileLayer(osmUrl, {attribution: osmAttrib}),
+				opnMap = L.tileLayer(opnUrl, {attribution: opnAttrib});
+			
+		
+
+
+			var map = L.map('map', {
+					layers: [osmMap] // only add one!
+				})
+				.setView([39.292560, -94.756359], 4);
+
+			var baseLayers = {
+				"Toner": osmMap,
+				"Traditional": opnMap
+			};
+
+			var overlays = {
+				"Ford Dealers": ford,
+				"Chevy Dealers": chevy,
+				"GMC Dealers": gmc
+			};
+			
+			L.control.layers(baseLayers,overlays).addTo(map);
+
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Learning jQuery</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+	<script type="text/javascript" src="jquery.min.js"></script>
+   
+	<style>
+	</style>
+</head>
+	
+<body>
+		<h1>This is something</h1>
+		<script>
+					
+			var movies = {
+			"Finding Nemo": {
+			releaseDate: 2003,
+			duration: 100,
+			actors: ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould"],
+			format: "DVD"
+			},
+			"Star Wars: Episode VI - Return of the Jedi": {
+			releaseDate: 1983,
+			duration: 134,
+			actors: ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+			format: "DVD"
+			},
+			"Harry Potter and the Goblet of Fire": {
+			releaseDate: 2005,
+			duration: 157,
+			actors: ["Daniel Radcliffe", "Emma Watson", "Rupert Grint"],
+			format: "Blu-ray"
+			}
+			};
+		
+		alert("The list of movies is" + movies.keys());
+		
+		</script>
+		
+		<script>
+			$("h1").slideUp(1000).slideDown(1000);
+		</script>
+		
+</body>
+</html>

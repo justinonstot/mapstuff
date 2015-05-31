@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Simple Leaflet Map</title>
+    <meta charset="utf-8" />
+	<link 
+		rel="stylesheet" 
+		href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" 
+	/>
+	
+	<style>
+		#map {
+			width: 800px;
+			height: 600px;
+		}
+		
+	</style>
+	
+</head>	
+
+<body>
+	<h1>This is my map</h1>
+	<div id="map"></div>
+	
+	<script 
+		src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js">
+	</script>
+	
+
+   <script>  
+		
+		var dealers = [
+			
+["Rick Hendrick GMC",33.966395,-84.143648,"GMC"],
+["Sternberg Chrysler Center Inc",38.367330,-86.943965,"Chrysler"],
+["Kamaaina Motors",19.705430,-155.065383,"Other"],
+["Newburgh Park Motors Inc",41.503027,-74.060367,"Other"],
+["West Motor Company Inc",42.102244,-111.876160,"Other"],
+["Salem Chrysler Jeep Dodge",40.925074,-80.854620,"Dodge"],
+["Kuntz Motor Company",40.878114,-78.739023,"Other"],
+["Larry H Miller Chrysler Jeep",40.897013,-111.892763,"Chrysler"],
+["Bosak Motors Of Merrillville, Llc",41.470942,-87.374722,"Other"],
+["Normandin Chrysler Jeep Dodge",37.274466,-121.870823,"Dodge"],
+["Marshall Motor Co Inc",38.771114,-97.614186,"Other"]
+
+		];
+		
+		var map = L.map('map').setView([39.7589, -121.8078], 4);
+		mapLink = 
+			'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+		L.tileLayer(
+			'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+
+			//'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+			attribution: 'Map data &copy; ' + mapLink + ' Contributors',
+			maxZoom: 18,
+			}).addTo(map);
+		
+				for (var i = 0; i < dealers.length; i++) {
+					marker = new L.marker([dealers[i][1],dealers[i][2]],
+						{opacity:0.5,
+						 
+						})
+			.addTo(map)
+			.bindPopup(dealers[i][0]);
+			}
+	
+    </script>
+</body>
+</html>
